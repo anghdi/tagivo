@@ -177,7 +177,7 @@
         <table class="header-table">
             <tr>
                 <td>
-                    <div class="logo">TAGIVO</div>
+                    <div class="logo">TAGIVO <span style="font-size: 10px; color: #64748b; font-weight: normal; vertical-align: middle; margin-left: 2px;">by Khuncode</span></div>
                 </td>
                 <td>
                     <div class="invoice-title">INVOICE</div>
