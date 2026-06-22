@@ -115,3 +115,50 @@ test('invoice PDF download generates pdf file stream', function () {
     $response->assertStatus(200);
     $response->assertHeader('content-type', 'application/pdf');
 });
+
+test('admin login page is accessible and redirects if already logged in', function () {
+    $response = $this->get(route('admin.login'));
+    $response->assertStatus(200);
+
+    $response = $this->withSession(['admin_logged_in' => true])->get(route('admin.login'));
+    $response->assertRedirect(route('admin.dashboard'));
+});
+
+test('admin authentication succeeds with correct passcode', function () {
+    $correctPasscode = config('services.admin.key');
+
+    $response = $this->post(route('admin.login'), [
+        'passcode' => $correctPasscode
+    ]);
+
+    $response->assertRedirect(route('admin.dashboard'));
+    $this->assertTrue(session('admin_logged_in'));
+});
+
+test('admin authentication fails with incorrect passcode', function () {
+    $response = $this->post(route('admin.login'), [
+        'passcode' => 'wrongcode'
+    ]);
+
+    $response->assertRedirect();
+    $response->assertSessionHasErrors('passcode');
+    $this->assertNull(session('admin_logged_in'));
+});
+
+test('admin dashboard redirects to login if not authenticated', function () {
+    $response = $this->get(route('admin.dashboard'));
+    $response->assertRedirect(route('admin.login'));
+});
+
+test('admin dashboard is accessible when authenticated', function () {
+    $response = $this->withSession(['admin_logged_in' => true])->get(route('admin.dashboard'));
+    $response->assertStatus(200);
+    $response->assertSee('Dashboard Admin');
+});
+
+test('admin logout clears session and redirects to login', function () {
+    $response = $this->withSession(['admin_logged_in' => true])->post(route('admin.logout'));
+
+    $response->assertRedirect(route('admin.login'));
+    $this->assertNull(session('admin_logged_in'));
+});

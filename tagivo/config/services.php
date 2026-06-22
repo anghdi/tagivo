@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'admin' => [
+        'key' => env('TAGIVO_ADMIN_KEY', 'khuncode123'),
+    ],
+
 ];
