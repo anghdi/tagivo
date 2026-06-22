@@ -15,13 +15,10 @@ Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login
 Route::post('/admin/login', [AdminController::class, 'authenticate']);
 Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
+use App\Http\Middleware\AdminAuthMiddleware;
+
 // Secure Admin Dashboard
-Route::middleware([function ($request, $next) {
-    if (!session('admin_logged_in')) {
-        return redirect()->route('admin.login')->withErrors(['passcode' => 'Silakan login terlebih dahulu.']);
-    }
-    return $next($request);
-}])->group(function () {
+Route::middleware(AdminAuthMiddleware::class)->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/invoice/{id}/status', [AdminController::class, 'updateStatus'])->name('admin.invoice.status');
 });
