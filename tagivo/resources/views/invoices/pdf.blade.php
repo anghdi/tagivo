@@ -169,6 +169,27 @@
             color: #b91c1c;
             border-color: #fecaca;
         }
+        .bank-details-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            margin-bottom: 30px;
+        }
+        .bank-details-title {
+            font-size: 8px;
+            font-weight: bold;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .bank-details-table {
+            width: 100%;
+        }
+        .bank-details-table td {
+            width: 33.33%;
+            padding: 0;
+            vertical-align: top;
+        }
     </style>
 </head>
 <body>
@@ -254,6 +275,35 @@
                 </td>
             </tr>
         </table>
+
+        @if($invoice->bank_name || $invoice->account_number || $invoice->account_holder)
+        <!-- Bank Details -->
+        <div class="bank-details-box">
+            <div class="bank-details-title">Informasi Pembayaran (Transfer Bank)</div>
+            <table class="bank-details-table">
+                <tr>
+                    @if($invoice->bank_name)
+                    <td>
+                        <span class="meta-label">Bank</span>
+                        <span class="meta-value">{{ $invoice->bank_name }}</span>
+                    </td>
+                    @endif
+                    @if($invoice->account_number)
+                    <td>
+                        <span class="meta-label">No. Rekening</span>
+                        <span class="meta-value">{{ $invoice->account_number }}</span>
+                    </td>
+                    @endif
+                    @if($invoice->account_holder)
+                    <td>
+                        <span class="meta-label">Atas Nama</span>
+                        <span class="meta-value">{{ $invoice->account_holder }}</span>
+                    </td>
+                    @endif
+                </tr>
+            </table>
+        </div>
+        @endif
 
         <!-- Invoice Items -->
         <table class="items-table">

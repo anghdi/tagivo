@@ -44,6 +44,9 @@ class InvoiceRepository implements InvoiceRepositoryInterface
                 'subtotal' => $data['subtotal'] ?? 0,
                 'grand_total' => $data['grand_total'] ?? 0,
                 'status' => $data['status'] ?? 'unpaid',
+                'bank_name' => $data['bank_name'] ?? null,
+                'account_number' => $data['account_number'] ?? null,
+                'account_holder' => $data['account_holder'] ?? null,
             ]);
 
             if (isset($data['items']) && is_array($data['items'])) {

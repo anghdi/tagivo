@@ -22,6 +22,9 @@ class Invoice extends Model
         'subtotal',
         'grand_total',
         'status',
+        'bank_name',
+        'account_number',
+        'account_holder',
     ];
 
     protected $casts = [
