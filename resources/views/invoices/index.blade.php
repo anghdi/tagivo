@@ -28,11 +28,11 @@
     <form id="invoiceForm" action="{{ route('invoices.store') }}" method="POST" class="space-y-8">
         @csrf
         
-        <!-- Grid Layout: Form & Summary -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <!-- Stacked Layout: Form & Summary -->
+        <div class="space-y-8">
             
-            <!-- Left 2-Columns: Invoice details -->
-            <div class="lg:col-span-2 space-y-8">
+            <!-- Invoice details -->
+            <div class="space-y-8">
                 <!-- Card Container representing a real paper invoice -->
                 <div class="bg-surface-1 border border-hairline rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md">
                     <!-- Top Decorator Bar -->
@@ -196,13 +196,23 @@
                 </div>
             </div>
 
-            <!-- Right Column: Summary & Actions -->
-            <div class="space-y-6 lg:sticky lg:top-24">
-                <!-- Summary Card -->
-                <div class="bg-surface-1 border border-hairline rounded-2xl shadow-xl p-6 space-y-6">
-                    <h3 class="text-xs font-bold text-ink uppercase tracking-eyebrow border-b border-hairline pb-4">Ringkasan Total</h3>
+            <!-- Summary & Actions Card (Full Width Stacked) -->
+            <div class="bg-surface-1 border border-hairline rounded-2xl shadow-xl p-6 sm:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- Action / Submit -->
+                    <div class="space-y-4 order-2 md:order-1">
+                        <button type="submit" id="submitBtn" class="w-full flex items-center justify-center gap-2 px-4 py-3.5 bg-primary hover:bg-primary-hover active:bg-primary-focus text-on-primary font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-200 group">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+                            Simpan &amp; Buat Tautan
+                        </button>
+                        <p class="text-center md:text-left text-xs text-ink-subtle font-medium">
+                            Setelah disimpan, Anda akan diarahkan ke halaman pratinjau yang siap dibagikan kepada klien.
+                        </p>
+                    </div>
                     
-                    <div class="space-y-3">
+                    <!-- Totals Breakdown -->
+                    <div class="space-y-3 order-1 md:order-2 md:border-l md:border-hairline md:pl-8">
+                        <h3 class="text-xs font-bold text-ink uppercase tracking-eyebrow border-b border-hairline pb-2 mb-2 md:hidden">Ringkasan Total</h3>
                         <div class="flex justify-between text-sm text-ink-muted font-medium">
                             <span>Subtotal</span>
                             <span id="summarySubtotal" class="text-ink">Rp 0</span>
@@ -220,16 +230,6 @@
                             <span id="summaryGrandTotal" class="text-primary-hover font-extrabold text-lg">Rp 0</span>
                         </div>
                     </div>
-
-                    <!-- Submit action -->
-                    <button type="submit" id="submitBtn" class="w-full flex items-center justify-center gap-2 px-4 py-3.5 bg-primary hover:bg-primary-hover active:bg-primary-focus text-on-primary font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-200 group">
-                        <svg class="w-5 h-5 group-hover:scale-110 transition-transform text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
-                        Simpan &amp; Buat Tautan
-                    </button>
-                    
-                    <p class="text-center text-xs text-ink-subtle font-medium">
-                        Setelah disimpan, Anda akan diarahkan ke halaman pratinjau yang siap dibagikan kepada klien.
-                    </p>
                 </div>
             </div>
 
@@ -481,13 +481,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .then(response => {
-            if (!response.ok) {
-                // If validation failed
-                return response.json().then(errData => {
-                    throw errData;
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        throw data;
+                    }
+                    return data;
+                });
+            } else {
+                return response.text().then(text => {
+                    let errorMsg = `Server error (${response.status})`;
+                    if (text.includes('<title>')) {
+                        const titleMatch = text.match(/<title>([^<]+)<\/title>/i);
+                        if (titleMatch && titleMatch[1]) {
+                            errorMsg += `: ${titleMatch[1].trim()}`;
+                        }
+                    } else if (text.length > 0) {
+                        errorMsg += `: ${text.substring(0, 100).trim()}...`;
+                    }
+                    throw { message: errorMsg };
                 });
             }
-            return response.json();
         })
         .then(data => {
             if (data.success && data.redirect_url) {
