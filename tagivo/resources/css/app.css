@@ -43,7 +43,10 @@
     --color-inverse-surface-1: #f5f6f6;
     --color-inverse-surface-2: #f6f7f7;
     --color-inverse-ink: #000000;
+}
 
+/* Linear CSS Custom Properties in :root to avoid disabling Tailwind's default scales */
+:root {
     /* Border Radii */
     --radius-xs: 4px;
     --radius-sm: 6px;
@@ -75,3 +78,19 @@
     --tracking-eyebrow: 0.4px;
 }
 
+/* Global input text styling for dark mode */
+input, select, textarea {
+    color: #ffffff !important;
+}
+
+/* Ensure placeholders are readable */
+input::placeholder, textarea::placeholder {
+    color: #8a8f98 !important;
+    opacity: 0.8;
+}
+
+/* Dark mode compatibility for HTML5 date pickers */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}

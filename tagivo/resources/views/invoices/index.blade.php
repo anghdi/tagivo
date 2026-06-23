@@ -47,7 +47,7 @@
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <span class="text-ink-tertiary text-sm font-semibold">#</span>
                                     </div>
-                                    <input type="text" name="invoice_number" id="invoice_number" value="{{ $defaultInvoiceNumber }}" class="block w-full pl-8 pr-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink font-semibold placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
+                                    <input type="text" name="invoice_number" id="invoice_number" value="{{ $defaultInvoiceNumber }}" class="block w-full pl-8 pr-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-semibold placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
                                 </div>
                             </div>
                             
@@ -55,11 +55,11 @@
                             <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                                 <div class="flex-1">
                                     <label class="block text-xs font-bold uppercase tracking-eyebrow text-ink-subtle mb-1.5">Tanggal</label>
-                                    <input type="date" name="invoice_date" id="invoice_date" value="{{ date('Y-m-d') }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
+                                    <input type="date" name="invoice_date" id="invoice_date" value="{{ date('Y-m-d') }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
                                 </div>
                                 <div class="flex-1">
                                     <label class="block text-xs font-bold uppercase tracking-eyebrow text-ink-subtle mb-1.5">Jatuh Tempo</label>
-                                    <input type="date" name="due_date" id="due_date" value="{{ date('Y-m-d', strtotime('+7 days')) }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="date" name="due_date" id="due_date" value="{{ date('Y-m-d', strtotime('+7 days')) }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                             </div>
                         </div>
@@ -76,15 +76,15 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Nama Perusahaan / Freelancer</label>
-                                    <input type="text" name="sender_name" id="sender_name" placeholder="Contoh: PT Kreatif Mandiri" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
+                                    <input type="text" name="sender_name" id="sender_name" placeholder="Contoh: PT Kreatif Mandiri" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Surel (Email)</label>
-                                    <input type="email" name="sender_email" id="sender_email" placeholder="kreatif@mandiri.com" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="email" name="sender_email" id="sender_email" placeholder="kreatif@mandiri.com" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Alamat Lengkap</label>
-                                    <textarea name="sender_address" id="sender_address" rows="3" placeholder="Jl. Sudirman No. 12, Jakarta" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm"></textarea>
+                                    <textarea name="sender_address" id="sender_address" rows="3" placeholder="Jl. Sudirman No. 12, Jakarta" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm"></textarea>
                                 </div>
                             </div>
 
@@ -98,15 +98,15 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Nama Klien / Perusahaan</label>
-                                    <input type="text" name="client_name" id="client_name" placeholder="Contoh: Budi Santoso" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
+                                    <input type="text" name="client_name" id="client_name" placeholder="Contoh: Budi Santoso" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Surel (Email)</label>
-                                    <input type="email" name="client_email" id="client_email" placeholder="budi@klien.com" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="email" name="client_email" id="client_email" placeholder="budi@klien.com" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Alamat Lengkap</label>
-                                    <textarea name="client_address" id="client_address" rows="3" placeholder="Gedung Cyber 2 Lantai 10, Jakarta" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm"></textarea>
+                                    <textarea name="client_address" id="client_address" rows="3" placeholder="Gedung Cyber 2 Lantai 10, Jakarta" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -122,15 +122,15 @@
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Nama Bank</label>
-                                    <input type="text" name="bank_name" id="bank_name" placeholder="Contoh: Bank BCA" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="text" name="bank_name" id="bank_name" placeholder="Contoh: Bank BCA" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Nomor Rekening</label>
-                                    <input type="text" name="account_number" id="account_number" placeholder="Contoh: 1234567890" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="text" name="account_number" id="account_number" placeholder="Contoh: 1234567890" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold text-ink-subtle mb-1">Pemegang Rekening (Atas Nama)</label>
-                                    <input type="text" name="account_holder" id="account_holder" placeholder="Contoh: PT Kreatif Mandiri" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <label class="block text-xs font-semibold text-ink-subtle mb-1">Atas Nama</label>
+                                    <input type="text" name="account_holder" id="account_holder" placeholder="Contoh: PT Kreatif Mandiri" class="block w-full px-3 py-2 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                             </div>
                         </div>
@@ -152,8 +152,8 @@
                                     <thead>
                                         <tr class="border-b border-hairline text-xs font-bold uppercase tracking-eyebrow text-ink-subtle">
                                             <th class="py-3 pr-4 w-1/2">Deskripsi / Layanan</th>
-                                            <th class="py-3 px-4 w-16 text-center">Qty</th>
-                                            <th class="py-3 px-4 w-32 text-right">Harga Satuan</th>
+                                            <th class="py-3 px-2 w-28 text-center">Qty</th>
+                                            <th class="py-3 px-2 w-48 text-right">Harga Satuan</th>
                                             <th class="py-3 pl-4 w-36 text-right">Total</th>
                                             <th class="py-3 pl-4 w-10 text-center"></th>
                                         </tr>
@@ -178,13 +178,13 @@
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <span class="text-ink-subtle text-sm font-semibold">Rp</span>
                                     </div>
-                                    <input type="number" name="discount_amount" id="discount_amount" min="0" value="0" step="1000" class="block w-full pl-10 pr-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="number" name="discount_amount" id="discount_amount" min="0" value="0" step="1000" class="block w-full pl-10 pr-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-eyebrow text-ink-subtle mb-1.5">Pajak (%)</label>
                                 <div class="relative rounded-xl shadow-sm">
-                                    <input type="number" name="tax_percentage" id="tax_percentage" min="0" max="100" value="0" step="0.1" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="number" name="tax_percentage" id="tax_percentage" min="0" max="100" value="0" step="0.1" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                         <span class="text-ink-subtle text-sm font-semibold">%</span>
                                     </div>
@@ -269,17 +269,17 @@ document.addEventListener('DOMContentLoaded', function() {
         tr.id = `desktop-row-${id}`;
         tr.innerHTML = `
             <td class="py-4 pr-4">
-                <input type="text" name="items[${id}][item_name]" class="item-name block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" placeholder="Nama Barang atau Layanan" required>
+                <input type="text" name="items[${id}][item_name]" class="item-name block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" placeholder="Nama Barang atau Layanan" required>
             </td>
-            <td class="py-4 px-4 text-center">
-                <input type="number" name="items[${id}][quantity]" class="item-quantity block w-full px-2 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink text-center focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" min="0.01" step="any" value="1" required>
+            <td class="py-4 px-2 text-center">
+                <input type="number" name="items[${id}][quantity]" class="item-quantity block w-full px-2 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white text-center focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" min="0.01" step="any" value="1" required>
             </td>
-            <td class="py-4 px-4 text-right">
+            <td class="py-4 px-2 text-right">
                 <div class="relative rounded-xl shadow-xs">
                     <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
                         <span class="text-ink-subtle text-xs">Rp</span>
                     </div>
-                    <input type="number" name="items[${id}][unit_price]" class="item-price block w-full pl-8 pr-2 py-2.5 bg-surface-2 border border-hairline rounded-xl text-ink text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" min="0" step="any" value="0" required>
+                    <input type="number" name="items[${id}][unit_price]" class="item-price block w-full pl-8 pr-2 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" min="0" step="any" value="0" required>
                 </div>
             </td>
             <td class="py-4 pl-4 text-right align-middle text-sm font-semibold text-ink-muted">
@@ -304,12 +304,12 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div>
                 <label class="block text-xs font-semibold text-ink-subtle mb-1">Deskripsi / Layanan</label>
-                <input type="text" class="item-name block w-full px-3 py-2.5 bg-surface-3 border border-hairline rounded-xl text-ink placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 transition duration-150 sm:text-sm" placeholder="Nama Barang atau Layanan" required>
+                <input type="text" class="item-name block w-full px-3 py-2.5 bg-surface-3 border border-hairline rounded-xl text-white placeholder-ink-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 transition duration-150 sm:text-sm" placeholder="Nama Barang atau Layanan" required>
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Jumlah (Qty)</label>
-                    <input type="number" class="item-quantity block w-full px-3 py-2.5 bg-surface-3 border border-hairline rounded-xl text-ink focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 transition duration-150 sm:text-sm" min="0.01" step="any" value="1" required>
+                    <input type="number" class="item-quantity block w-full px-3 py-2.5 bg-surface-3 border border-hairline rounded-xl text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 transition duration-150 sm:text-sm" min="0.01" step="any" value="1" required>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-ink-subtle mb-1">Harga Satuan</label>
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
                             <span class="text-ink-subtle text-xs">Rp</span>
                         </div>
-                        <input type="number" class="item-price block w-full pl-8 pr-2 py-2.5 bg-surface-3 border border-hairline rounded-xl text-ink text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 transition duration-150 sm:text-sm" min="0" step="any" value="0" required>
+                        <input type="number" class="item-price block w-full pl-8 pr-2 py-2.5 bg-surface-3 border border-hairline rounded-xl text-white text-right focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 transition duration-150 sm:text-sm" min="0" step="any" value="0" required>
                     </div>
                 </div>
             </div>
