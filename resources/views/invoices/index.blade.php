@@ -55,11 +55,11 @@
                             <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                                 <div class="flex-1">
                                     <label class="block text-xs font-bold uppercase tracking-eyebrow text-ink-subtle mb-1.5">Tanggal</label>
-                                    <input type="date" name="invoice_date" id="invoice_date" value="{{ date('Y-m-d') }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
+                                    <input type="date" name="invoice_date" id="invoice_date" min="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm" required>
                                 </div>
                                 <div class="flex-1">
                                     <label class="block text-xs font-bold uppercase tracking-eyebrow text-ink-subtle mb-1.5">Jatuh Tempo</label>
-                                    <input type="date" name="due_date" id="due_date" value="{{ date('Y-m-d', strtotime('+7 days')) }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
+                                    <input type="date" name="due_date" id="due_date" min="{{ date('Y-m-d') }}" value="{{ date('Y-m-d', strtotime('+7 days')) }}" class="block w-full px-3 py-2.5 bg-surface-2 border border-hairline rounded-xl text-white font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/45 focus:bg-surface-3 transition duration-150 sm:text-sm">
                                 </div>
                             </div>
                         </div>
@@ -443,6 +443,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Bind listeners to global tax/discount inputs
     document.getElementById('discount_amount').addEventListener('input', calculateTotals);
     document.getElementById('tax_percentage').addEventListener('input', calculateTotals);
+
+    // Date input constraints (disable past dates)
+    const invoiceDateInput = document.getElementById('invoice_date');
+    const dueDateInput = document.getElementById('due_date');
+
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    invoiceDateInput.min = todayStr;
+    dueDateInput.min = invoiceDateInput.value || todayStr;
+
+    invoiceDateInput.addEventListener('change', function() {
+        dueDateInput.min = this.value;
+        if (dueDateInput.value && dueDateInput.value < this.value) {
+            dueDateInput.value = this.value;
+        }
+    });
 
     // Initial setup: Add one row on page load
     createItemRow();

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Invoice {{ $invoice->invoice_number }}</title>
     <style>
+        @page {
+            margin: 40px 40px 60px 40px;
+        }
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             color: #334155;
@@ -11,6 +14,23 @@
             padding: 0;
             font-size: 12px;
             line-height: 1.4;
+        }
+        .footer {
+            position: fixed;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            font-size: 8px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+        }
+        .footer-left {
+            float: left;
+        }
+        .footer-right {
+            float: right;
         }
         .invoice-box {
             max-width: 100%;
@@ -193,6 +213,10 @@
     </style>
 </head>
 <body>
+    <div class="footer">
+        <div class="footer-left">Dibuat via Tagivo (tagivo.test)</div>
+        <div class="footer-right">Waktu Cetak: {{ now()->timezone('Asia/Jakarta')->format('d M Y H:i:s') }} WIB</div>
+    </div>
     <div class="invoice-box">
         <!-- Logo & Title -->
         <table class="header-table">

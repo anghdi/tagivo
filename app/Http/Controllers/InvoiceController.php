@@ -40,7 +40,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'invoice_number'  => 'required|string|unique:invoices,invoice_number',
+            'invoice_number'  => 'required|string|max:255|unique:invoices,invoice_number',
             'sender_name'     => 'required|string|max:255',
             'sender_email'    => 'nullable|email|max:255',
             'sender_address'  => 'nullable|string',

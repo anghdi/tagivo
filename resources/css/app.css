@@ -18,23 +18,23 @@
     --color-primary-focus: #5e69d1;
     --color-brand-secure: #7a7fad;
 
-    /* Surface Ladder Colors */
-    --color-canvas: #010102;
-    --color-surface-1: #0f1011;
-    --color-surface-2: #141516;
-    --color-surface-3: #18191a;
-    --color-surface-4: #191a1b;
+    /* Surface Ladder Colors mapped to CSS Variables */
+    --color-canvas: var(--canvas);
+    --color-surface-1: var(--surface-1);
+    --color-surface-2: var(--surface-2);
+    --color-surface-3: var(--surface-3);
+    --color-surface-4: var(--surface-4);
 
-    /* Hairlines / Borders Colors */
-    --color-hairline: #23252a;
-    --color-hairline-strong: #34343a;
-    --color-hairline-tertiary: #3e3e44;
+    /* Hairlines / Borders Colors mapped to CSS Variables */
+    --color-hairline: var(--hairline);
+    --color-hairline-strong: var(--hairline-strong);
+    --color-hairline-tertiary: var(--hairline-tertiary);
 
-    /* Typography Ink Colors */
-    --color-ink: #f7f8f8;
-    --color-ink-muted: #d0d6e0;
-    --color-ink-subtle: #8a8f98;
-    --color-ink-tertiary: #62666d;
+    /* Typography Ink Colors mapped to CSS Variables */
+    --color-ink: var(--ink);
+    --color-ink-muted: var(--ink-muted);
+    --color-ink-subtle: var(--ink-subtle);
+    --color-ink-tertiary: var(--ink-tertiary);
 
     /* Semantic & Inverse Colors */
     --color-semantic-success: #27a644;
@@ -47,6 +47,24 @@
 
 /* Linear CSS Custom Properties in :root to avoid disabling Tailwind's default scales */
 :root {
+    /* Light Mode Variables (Default) */
+    --canvas: #f4f5f6;
+    --surface-1: #ffffff;
+    --surface-2: #f5f6f8;
+    --surface-3: #edeef2;
+    --surface-4: #e4e6eb;
+
+    --hairline: #e5e7eb;
+    --hairline-strong: #d1d5db;
+    --hairline-tertiary: #9ca3af;
+
+    --ink: #111213;
+    --ink-muted: #374151;
+    --ink-subtle: #6b7280;
+    --ink-tertiary: #9ca3af;
+    
+    --placeholder-color: #9ca3af;
+
     /* Border Radii */
     --radius-xs: 4px;
     --radius-sm: 6px;
@@ -78,19 +96,39 @@
     --tracking-eyebrow: 0.4px;
 }
 
-/* Global input text styling for dark mode */
+/* Dark Mode Overrides */
+html.dark {
+    --canvas: #010102;
+    --surface-1: #0f1011;
+    --surface-2: #141516;
+    --surface-3: #18191a;
+    --surface-4: #191a1b;
+
+    --hairline: #23252a;
+    --hairline-strong: #34343a;
+    --hairline-tertiary: #3e3e44;
+
+    --ink: #f7f8f8;
+    --ink-muted: #d0d6e0;
+    --ink-subtle: #8a8f98;
+    --ink-tertiary: #62666d;
+    
+    --placeholder-color: #8a8f98;
+}
+
+/* Global input text styling */
 input, select, textarea {
-    color: #ffffff !important;
+    color: var(--ink) !important;
 }
 
 /* Ensure placeholders are readable */
 input::placeholder, textarea::placeholder {
-    color: #8a8f98 !important;
+    color: var(--placeholder-color) !important;
     opacity: 0.8;
 }
 
 /* Dark mode compatibility for HTML5 date pickers */
-input[type="date"]::-webkit-calendar-picker-indicator {
+html.dark input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
     cursor: pointer;
 }

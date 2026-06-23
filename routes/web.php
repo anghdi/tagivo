@@ -12,7 +12,7 @@ Route::get('/invoice/{slug}/pdf', [InvoiceController::class, 'downloadPdf'])->na
 
 // Admin Auth
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
-Route::post('/admin/login', [AdminController::class, 'authenticate']);
+Route::post('/admin/login', [AdminController::class, 'authenticate'])->middleware('throttle:5,1');
 Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 use App\Http\Middleware\AdminAuthMiddleware;
