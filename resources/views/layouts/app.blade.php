@@ -101,7 +101,7 @@
 
     <!-- Script: Theme Toggle Implementation -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        function initThemeToggle() {
             const toggleBtn = document.getElementById('themeToggleBtn');
             if (toggleBtn) {
                 toggleBtn.addEventListener('click', () => {
@@ -114,7 +114,7 @@
                 const isDark = document.documentElement.classList.contains('dark');
                 updateToggleIcon(isDark);
             }
-        });
+        }
 
         function updateToggleIcon(isDark) {
             const sunIcon = document.getElementById('themeSunIcon');
@@ -128,6 +128,13 @@
                     moonIcon.classList.remove('hidden');
                 }
             }
+        }
+
+        // Run immediately if DOM is ready, or wait for it
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initThemeToggle);
+        } else {
+            initThemeToggle();
         }
     </script>
 
