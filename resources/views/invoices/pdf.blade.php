@@ -163,14 +163,15 @@
             text-align: right;
         }
         .badge {
-            padding: 3px 8px;
-            font-size: 8px;
+            padding: 4px 10px;
+            font-size: 9px;
             font-weight: bold;
             text-transform: uppercase;
             border-radius: 4px;
             border: 1px solid;
-            line-height: 1;
+            line-height: 1.2;
             text-align: center;
+            vertical-align: middle;
         }
         .badge-unpaid {
             background-color: #fffbeb;
@@ -244,7 +245,7 @@
                         $class = $badgeClass[$invoice->status] ?? $badgeClass['unpaid'];
                         $text = $statusText[$invoice->status] ?? $statusText['unpaid'];
                     @endphp
-                    <div style="margin-top: 5px;">
+                    <div style="margin-top: 10px;">
                         <table align="right" style="border-collapse: collapse; width: auto; border: none; margin: 0; padding: 0;">
                             <tr>
                                 <td class="badge {{ $class }}">{{ $text }}</td>
