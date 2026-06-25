@@ -17,20 +17,12 @@
         }
         .footer {
             position: fixed;
-            bottom: -30px;
+            bottom: -35px;
             left: 0;
             right: 0;
             height: 20px;
             font-size: 8px;
             color: #94a3b8;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 6px;
-        }
-        .footer-left {
-            float: left;
-        }
-        .footer-right {
-            float: right;
         }
         .invoice-box {
             max-width: 100%;
@@ -45,6 +37,13 @@
         .header-table td {
             vertical-align: top;
             padding-bottom: 25px;
+        }
+        .header-table td.logo-cell {
+            width: 50%;
+        }
+        .header-table td.title-cell {
+            width: 50%;
+            text-align: right;
         }
         .logo {
             font-size: 22px;
@@ -65,6 +64,7 @@
             margin-top: 3px;
         }
         .meta-table {
+            width: 100%;
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
             margin-bottom: 30px;
@@ -75,7 +75,6 @@
             vertical-align: top;
         }
         .meta-label {
-            display: block;
             font-size: 8px;
             font-weight: bold;
             color: #94a3b8;
@@ -91,6 +90,12 @@
             width: 50%;
             padding-bottom: 30px;
             vertical-align: top;
+        }
+        .address-table td.sender-cell {
+            padding-right: 20px;
+        }
+        .address-table td.client-cell {
+            padding-left: 20px;
         }
         .address-label {
             font-size: 8px;
@@ -111,6 +116,7 @@
             line-height: 1.5;
         }
         .items-table {
+            width: 100%;
             margin-bottom: 30px;
         }
         .items-table th {
@@ -129,14 +135,6 @@
         .item-name {
             font-weight: bold;
             color: #334155;
-        }
-        .totals-container {
-            width: 100%;
-            margin-top: 15px;
-        }
-        .totals-table {
-            width: 250px;
-            margin-left: auto;
         }
         .totals-table td {
             padding: 5px 0;
@@ -165,14 +163,14 @@
             text-align: right;
         }
         .badge {
-            display: inline-block;
             padding: 3px 8px;
             font-size: 8px;
             font-weight: bold;
             text-transform: uppercase;
             border-radius: 4px;
             border: 1px solid;
-            margin-top: 3px;
+            line-height: 1;
+            text-align: center;
         }
         .badge-unpaid {
             background-color: #fffbeb;
@@ -189,11 +187,12 @@
             color: #b91c1c;
             border-color: #fecaca;
         }
-        .bank-details-box {
+        .bank-details-box-table {
+            width: 100%;
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
-            padding: 12px 15px;
             margin-bottom: 30px;
+            border-collapse: collapse;
         }
         .bank-details-title {
             font-size: 8px;
@@ -214,17 +213,21 @@
 </head>
 <body>
     <div class="footer">
-        <div class="footer-left">Dibuat via Tagivo (tagivo.test)</div>
-        <div class="footer-right">Waktu Cetak: {{ now()->timezone('Asia/Jakarta')->format('d M Y H:i:s') }} WIB</div>
+        <table style="width: 100%; border-top: 1px solid #e2e8f0; padding-top: 6px; border-collapse: collapse; border: none;">
+            <tr>
+                <td style="text-align: left; border: none; padding: 0; font-size: 8px; color: #94a3b8;">Dibuat via Tagivo (tagivo.test)</td>
+                <td style="text-align: right; border: none; padding: 0; font-size: 8px; color: #94a3b8;">Waktu Cetak: {{ now()->timezone('Asia/Jakarta')->format('d M Y H:i:s') }} WIB</td>
+            </tr>
+        </table>
     </div>
     <div class="invoice-box">
         <!-- Logo & Title -->
         <table class="header-table">
             <tr>
-                <td>
+                <td class="logo-cell">
                     <div class="logo">TAGIVO <span style="font-size: 10px; color: #64748b; font-weight: normal; vertical-align: middle; margin-left: 2px;">by Khuncode</span></div>
                 </td>
-                <td>
+                <td class="title-cell">
                     <div class="invoice-title">INVOICE</div>
                     <div class="invoice-num">#{{ $invoice->invoice_number }}</div>
                     @php
@@ -241,8 +244,12 @@
                         $class = $badgeClass[$invoice->status] ?? $badgeClass['unpaid'];
                         $text = $statusText[$invoice->status] ?? $statusText['unpaid'];
                     @endphp
-                    <div style="text-align: right;">
-                        <span class="badge {{ $class }}">{{ $text }}</span>
+                    <div style="margin-top: 5px;">
+                        <table align="right" style="border-collapse: collapse; width: auto; border: none; margin: 0; padding: 0;">
+                            <tr>
+                                <td class="badge {{ $class }}">{{ $text }}</td>
+                            </tr>
+                        </table>
                     </div>
                 </td>
             </tr>
@@ -252,20 +259,20 @@
         <table class="meta-table">
             <tr>
                 <td>
-                    <span class="meta-label">Tanggal Terbit</span>
-                    <span class="meta-value">{{ $invoice->invoice_date->format('d M Y') }}</span>
+                    <div class="meta-label">Tanggal Terbit</div>
+                    <div class="meta-value">{{ $invoice->invoice_date->format('d M Y') }}</div>
                 </td>
                 <td>
-                    <span class="meta-label">Jatuh Tempo</span>
-                    <span class="meta-value">{{ $invoice->due_date ? $invoice->due_date->format('d M Y') : '-' }}</span>
+                    <div class="meta-label">Jatuh Tempo</div>
+                    <div class="meta-value">{{ $invoice->due_date ? $invoice->due_date->format('d M Y') : '-' }}</div>
                 </td>
                 <td>
-                    <span class="meta-label">Subtotal</span>
-                    <span class="meta-value">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</span>
+                    <div class="meta-label">Subtotal</div>
+                    <div class="meta-value">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</div>
                 </td>
                 <td>
-                    <span class="meta-label">Total Tagihan</span>
-                    <span class="meta-value" style="color: #4f46e5;">Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</span>
+                    <div class="meta-label">Total Tagihan</div>
+                    <div class="meta-value" style="color: #4f46e5;">Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</div>
                 </td>
             </tr>
         </table>
@@ -273,7 +280,7 @@
         <!-- Sender & Client Addresses -->
         <table class="address-table">
             <tr>
-                <td>
+                <td class="sender-cell">
                     <div class="address-label">Diterbitkan Oleh</div>
                     <div class="address-name">{{ $invoice->sender_name }}</div>
                     <div class="address-details">
@@ -285,7 +292,7 @@
                         @endif
                     </div>
                 </td>
-                <td>
+                <td class="client-cell">
                     <div class="address-label">Ditagihkan Kepada</div>
                     <div class="address-name">{{ $invoice->client_name }}</div>
                     <div class="address-details">
@@ -302,31 +309,35 @@
 
         @if($invoice->bank_name || $invoice->account_number || $invoice->account_holder)
         <!-- Bank Details -->
-        <div class="bank-details-box">
-            <div class="bank-details-title">Informasi Pembayaran (Transfer Bank)</div>
-            <table class="bank-details-table">
-                <tr>
-                    @if($invoice->bank_name)
-                    <td>
-                        <span class="meta-label">Bank</span>
-                        <span class="meta-value">{{ $invoice->bank_name }}</span>
-                    </td>
-                    @endif
-                    @if($invoice->account_number)
-                    <td>
-                        <span class="meta-label">No. Rekening</span>
-                        <span class="meta-value">{{ $invoice->account_number }}</span>
-                    </td>
-                    @endif
-                    @if($invoice->account_holder)
-                    <td>
-                        <span class="meta-label">Atas Nama</span>
-                        <span class="meta-value">{{ $invoice->account_holder }}</span>
-                    </td>
-                    @endif
-                </tr>
-            </table>
-        </div>
+        <table class="bank-details-box-table">
+            <tr>
+                <td style="padding: 12px 15px; border: none;">
+                    <div class="bank-details-title">Informasi Pembayaran (Transfer Bank)</div>
+                    <table class="bank-details-table">
+                        <tr>
+                            @if($invoice->bank_name)
+                            <td style="border: none;">
+                                <div class="meta-label">Bank</div>
+                                <div class="meta-value">{{ $invoice->bank_name }}</div>
+                            </td>
+                            @endif
+                            @if($invoice->account_number)
+                            <td style="border: none;">
+                                <div class="meta-label">No. Rekening</div>
+                                <div class="meta-value">{{ $invoice->account_number }}</div>
+                            </td>
+                            @endif
+                            @if($invoice->account_holder)
+                            <td style="border: none;">
+                                <div class="meta-label">Atas Nama</div>
+                                <div class="meta-value">{{ $invoice->account_holder }}</div>
+                            </td>
+                            @endif
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
         @endif
 
         <!-- Invoice Items -->
@@ -352,36 +363,41 @@
         </table>
 
         <!-- Invoice Totals -->
-        <div class="totals-container">
-            <table class="totals-table">
-                <tr>
-                    <td class="totals-label">Subtotal</td>
-                    <td class="totals-value">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</td>
-                </tr>
-                @if($invoice->discount_amount > 0)
-                <tr>
-                    <td class="totals-label">Diskon</td>
-                    <td class="totals-value" style="color: #ef4444;">- Rp {{ number_format($invoice->discount_amount, 0, ',', '.') }}</td>
-                </tr>
-                @endif
-                @if($invoice->tax_percentage > 0)
-                <tr>
-                    <td class="totals-label">Pajak ({{ $invoice->tax_percentage }}%)</td>
-                    <td class="totals-value">
-                        @php
-                            $taxableAmount = max(0, $invoice->subtotal - $invoice->discount_amount);
-                            $taxAmount = $taxableAmount * ($invoice->tax_percentage / 100);
-                        @endphp
-                        Rp {{ number_format($taxAmount, 0, ',', '.') }}
-                    </td>
-                </tr>
-                @endif
-                <tr class="grand-total-row">
-                    <td class="grand-total-label">Total Tagihan</td>
-                    <td class="grand-total-value">Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</td>
-                </tr>
-            </table>
-        </div>
+        <table style="width: 100%; margin-top: 15px; border-collapse: collapse; border: none;">
+            <tr>
+                <td style="width: 55%; border: none;"></td>
+                <td style="width: 45%; border: none; vertical-align: top;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td class="totals-label" style="padding: 5px 0; font-size: 11px; color: #64748b;">Subtotal</td>
+                            <td class="totals-value" style="padding: 5px 0; font-size: 11px; text-align: right; font-weight: bold; color: #334155;">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</td>
+                        </tr>
+                        @if($invoice->discount_amount > 0)
+                        <tr>
+                            <td class="totals-label" style="padding: 5px 0; font-size: 11px; color: #64748b;">Diskon</td>
+                            <td class="totals-value" style="padding: 5px 0; font-size: 11px; text-align: right; font-weight: bold; color: #ef4444;">- Rp {{ number_format($invoice->discount_amount, 0, ',', '.') }}</td>
+                        </tr>
+                        @endif
+                        @if($invoice->tax_percentage > 0)
+                        <tr>
+                            <td class="totals-label" style="padding: 5px 0; font-size: 11px; color: #64748b;">Pajak ({{ $invoice->tax_percentage }}%)</td>
+                            <td class="totals-value" style="padding: 5px 0; font-size: 11px; text-align: right; font-weight: bold; color: #334155;">
+                                @php
+                                    $taxableAmount = max(0, $invoice->subtotal - $invoice->discount_amount);
+                                    $taxAmount = $taxableAmount * ($invoice->tax_percentage / 100);
+                                @endphp
+                                Rp {{ number_format($taxAmount, 0, ',', '.') }}
+                            </td>
+                        </tr>
+                        @endif
+                        <tr class="grand-total-row">
+                            <td class="grand-total-label" style="border-top: 1px solid #e2e8f0; padding-top: 8px; font-weight: bold; font-size: 13px; color: #0f172a;">Total Tagihan</td>
+                            <td class="grand-total-value" style="border-top: 1px solid #e2e8f0; padding-top: 8px; font-weight: bold; font-size: 15px; color: #4f46e5; text-align: right;">Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
